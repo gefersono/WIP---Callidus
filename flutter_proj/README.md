@@ -1,6 +1,6 @@
-# flutter_proj
+# automacao_flutter
 
-A new Flutter project.
+Tec Toy Sunmi Flutter
 
 ## Getting Started
 
