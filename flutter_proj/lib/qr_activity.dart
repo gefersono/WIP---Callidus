@@ -29,8 +29,8 @@ class QRCodeActivity extends StatelessWidget {
             const SizedBox(
               width: 400.0,
               height: 1.0,
-              child: const DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.grey),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
             TextButton(
@@ -44,8 +44,8 @@ class QRCodeActivity extends StatelessWidget {
             const SizedBox(
               width: 400.0,
               height: 1.0,
-              child: const DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.grey),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
             TextButton(
@@ -59,8 +59,8 @@ class QRCodeActivity extends StatelessWidget {
             const SizedBox(
               width: 400.0,
               height: 1.0,
-              child: const DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.grey),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
             TextButton(
@@ -74,8 +74,8 @@ class QRCodeActivity extends StatelessWidget {
             const SizedBox(
               width: 400.0,
               height: 1.0,
-              child: const DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.grey),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
             TextButton(
@@ -89,8 +89,8 @@ class QRCodeActivity extends StatelessWidget {
             const SizedBox(
               width: 400.0,
               height: 1.0,
-              child: const DecoratedBox(
-                decoration: const BoxDecoration(color: Colors.grey),
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
             TextButton(
@@ -103,7 +103,7 @@ class QRCodeActivity extends StatelessWidget {
             ),
             const SizedBox(
               width: 200.0,
-              height: 350.0,
+              height: 240.0,
             ),
             Center(
               child: ClipRRect(

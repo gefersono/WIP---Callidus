@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tectoy_app/formulary_activity.dart';
+import 'package:tectoy_app/image_activity.dart';
 import 'qr_activity.dart';
 import 'setting_activity.dart';
 import 'bar_code_activity.dart';
@@ -14,7 +16,7 @@ class Home extends StatelessWidget {
       backgroundColor: const Color(0xFF2e3040),
       appBar: AppBar(
         backgroundColor: const Color(0xFF171a2c),
-        title: const Text('Tec Toy Sunmi Flutter'),
+        title: const Text('TecToy Sunmi Flutter Android'),
         actions: <Widget>[
           IconButton(
             icon: const Image(image: AssetImage('images/setting.png')),
@@ -155,7 +157,13 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_tab.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const FormularyActivity()),
+                            );
+                          },
                         ),
                         const Text(
                           'Formulário',
@@ -176,7 +184,13 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_pic.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ImageActivity()),
+                            );
+                          },
                         ),
                         const Text(
                           'Imagem',

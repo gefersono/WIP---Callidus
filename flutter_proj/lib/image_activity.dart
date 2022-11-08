@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BarCodeActivity extends StatelessWidget {
-  //const MeuApp({Key? key}) : super(key: key);
-  const BarCodeActivity({super.key});
+class ImageActivity extends StatelessWidget {
+  const ImageActivity({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +9,7 @@ class BarCodeActivity extends StatelessWidget {
       backgroundColor: const Color(0xFF2e3040),
       appBar: AppBar(
         backgroundColor: const Color(0xFF171a2c),
-        title: const Text('BarCode'),
+        title: const Text('Imagem'),
       ),
       body: SafeArea(
         //Text('QrCode', style: TextStyle(fontSize: 30.0, color: Colors.white),),
@@ -24,67 +23,7 @@ class BarCodeActivity extends StatelessWidget {
                 textStyle: const TextStyle(fontSize: 20),
               ),
               onPressed: () {},
-              child: const Text('BarCode'),
-            ),
-            const SizedBox(
-              width: 400.0,
-              height: 1.0,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
-              child: const Text('Modelos de BarCode'),
-            ),
-            const SizedBox(
-              width: 400.0,
-              height: 1.0,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
-              child: const Text('HRI posição'),
-            ),
-            const SizedBox(
-              width: 400.0,
-              height: 1.0,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
-              child: const Text('Altura'),
-            ),
-            const SizedBox(
-              width: 400.0,
-              height: 1.0,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.grey),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
-              child: const Text('Largura'),
+              child: const Text('Alinhamento'),
             ),
             const SizedBox(
               width: 400.0,
@@ -102,8 +41,32 @@ class BarCodeActivity extends StatelessWidget {
               child: const Text('Cortar Papel'),
             ),
             const SizedBox(
-              width: 200.0,
-              height: 240.0,
+              width: 400.0,
+              height: 1.0,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
+              ),
+            ),
+            //Colocar checkbox aqui
+            const SizedBox(
+              width: 400.0,
+              height: 1.0,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter a search term',
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 100.0,
+              height: 360.0,
             ),
             Center(
               child: ClipRRect(
@@ -129,7 +92,11 @@ class BarCodeActivity extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        //print('teste0');
+
+                        //print('teste1');
+                      },
                       child: const Text('Imprimir'),
                     ),
                   ],
