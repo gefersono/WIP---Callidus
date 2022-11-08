@@ -275,7 +275,21 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_status.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            final snackBar = SnackBar(
+                              content: const Text('Teste'),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Status',
