@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:sunmi_printer/sunmi_printer.dart';
 
-class TextActivity extends StatelessWidget {
+class TextActivity extends StatefulWidget {
   //const MeuApp({Key? key}) : super(key: key);
   const TextActivity({super.key});
+  @override
+  State<TextActivity> createState() => _TextActivityState();
+}
+
+class _TextActivityState extends State<TextActivity> {
+
+  _printText () async {
+    // must start with this function if you are print with label
+    await SunmiPrinter.startLabelPrint();
+    /// 0 align left, 1 center, 2 align right.
+    await SunmiPrinter.setAlignment(PrintAlign.CENTER);
+    // spacing line
+    await SunmiPrinter.lineWrap(1);
+    // print image only support Uint8List
+    //await SunmiPrinter.printImage(img);
+    await SunmiPrinter.printText(' \n ');
+    // only run exitLabelPrint at last index if you need print multiple label at once;
+    await SunmiPrinter.exitLabelPrint();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -108,10 +128,8 @@ class TextActivity extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {
-                        //print('teste0');
-
-                        //print('teste1');
+                      onPressed: () async {
+                        _printText();
                       },
                       child: const Text('Imprimir'),
                     ),

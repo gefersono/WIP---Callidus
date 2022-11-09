@@ -1,14 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:tectoy_app/formulary_activity.dart';
 import 'package:tectoy_app/image_activity.dart';
+import 'package:sunmi_printer/sunmi_printer.dart';
 import 'qr_activity.dart';
 import 'setting_activity.dart';
 import 'bar_code_activity.dart';
 import 'text_activity.dart';
 
-class Home extends StatelessWidget {
-  //const MeuApp({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
   const Home({super.key});
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var placeholder = 'Função nao implementada';
+  late PrinterStatus _printerStatus;
+  //late PrinterMode _printerMode;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _bindingPrinter().then( (bool? isBind) async => {
+      if (isBind!) {
+        _getPrinterStatus(),
+        //_printerMode = await _getPrinterMode(),
+      }
+    });
+  }
+
+  /// must binding ur printer at first init in app
+  Future<bool?> _bindingPrinter() async {
+    final bool? result = await SunmiPrinter.bindingPrinter();
+    return result;
+  }
+
+  /// you can get printer status
+  Future<void> _getPrinterStatus() async {
+    final PrinterStatus result = await SunmiPrinter.getPrinterStatus();
+    setState(() {
+      _printerStatus = result;
+    });
+  }
+
+  /*
+  Future<PrinterMode> _getPrinterMode() async {
+    final PrinterMode mode = await SunmiPrinter.getPrinterMode();
+    return mode;
+  }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +96,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_all.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Teste Completo',
@@ -212,7 +268,22 @@ class Home extends StatelessWidget {
                           icon: const Image(
                               image:
                               AssetImage('images/function_threeline.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Avanço Papel',
@@ -233,7 +304,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_cash.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Gaveta',
@@ -254,7 +340,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_lcd.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Lcd',
@@ -276,8 +377,9 @@ class Home extends StatelessWidget {
                           icon: const Image(
                               image: AssetImage('images/function_status.png')),
                           onPressed: () {
+                            var printerstatus = (_printerStatus == PrinterStatus.NORMAL)?'A Impressora está funcionando':'Impressora não conectada';
                             final snackBar = SnackBar(
-                              content: const Text('Teste'),
+                              content: Text(printerstatus),
                               action: SnackBarAction(
                                 label: 'Undo',
                                 onPressed: () {
@@ -311,7 +413,22 @@ class Home extends StatelessWidget {
                           icon: const Image(
                               image:
                               AssetImage('images/function_blackline.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Tarja preta',
@@ -332,7 +449,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_label.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Teste de Etiqueta',
@@ -353,7 +485,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_cortar.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Cortar Papel',
@@ -374,7 +521,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_scanner.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Scanner',
@@ -395,7 +557,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_led.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Luz de Led',
@@ -416,7 +593,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_payment.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'PayGo',
@@ -437,7 +629,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_scanner.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Scanner Leitor',
@@ -458,7 +665,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_nfc.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'NFC',
@@ -479,7 +701,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_payment.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'M-Stef',
@@ -500,7 +737,22 @@ class Home extends StatelessWidget {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/telas.png')),
-                          onPressed: () {},
+                          onPressed: () {
+                            // NAO IMPLEMENTADA AINDA
+                            final snackBar = SnackBar(
+                              content: Text(placeholder),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          },
                         ),
                         const Text(
                           'Display',
