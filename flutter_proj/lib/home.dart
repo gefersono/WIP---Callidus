@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tectoy_app/formulary_activity.dart';
 import 'package:tectoy_app/image_activity.dart';
-import 'package:sunmi_printer/sunmi_printer.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 import 'qr_activity.dart';
 import 'setting_activity.dart';
 import 'bar_code_activity.dart';
@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var placeholder = 'Função nao implementada';
-  late PrinterStatus _printerStatus;
+  //late PrinterStatus _printerStatus;
   //late PrinterMode _printerMode;
 
   @override
@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
 
     _bindingPrinter().then( (bool? isBind) async => {
       if (isBind!) {
-        _getPrinterStatus(),
+        //_getPrinterStatus(),
         //_printerMode = await _getPrinterMode(),
       }
     });
@@ -37,12 +37,12 @@ class _HomeState extends State<Home> {
   }
 
   /// you can get printer status
-  Future<void> _getPrinterStatus() async {
-    final PrinterStatus result = await SunmiPrinter.getPrinterStatus();
-    setState(() {
-      _printerStatus = result;
-    });
-  }
+  //Future<void> _getPrinterStatus() async {
+    //final PrinterStatus result = await SunmiPrinter.getPrinterStatus();
+    //setState(() {
+      //_printerStatus = result;
+    //});
+  //}
 
   /*
   Future<PrinterMode> _getPrinterMode() async {
@@ -377,9 +377,10 @@ class _HomeState extends State<Home> {
                           icon: const Image(
                               image: AssetImage('images/function_status.png')),
                           onPressed: () {
-                            var printerstatus = (_printerStatus == PrinterStatus.NORMAL)?'A Impressora está funcionando':'Impressora não conectada';
+                            //var printerstatus = (_printerStatus == PrinterStatus.NORMAL)?'A Impressora está funcionando':'Impressora não conectada';
                             final snackBar = SnackBar(
-                              content: Text(printerstatus),
+                              content: const Text(''),
+                              //content: Text(printerstatus),
                               action: SnackBarAction(
                                 label: 'Undo',
                                 onPressed: () {

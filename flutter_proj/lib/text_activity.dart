@@ -18,7 +18,7 @@ class TextActivity extends StatefulWidget {
 class _TextActivityState extends State<TextActivity> {
   TextEditingController textController = TextEditingController(
       text:
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa欢迎光临(Simplified Chinese)\n歡迎光臨（traditional chinese）\nWelcome(English)\n어서 오세요.(Korean)\nいらっしゃいませ(Japanese)\nWillkommen in der(Germany)\nSouhaits de bienvenue(France)\nยินดีต้อนรับสู่(Thai)\nДобро пожаловать(Russian)\nBenvenuti a(Italian)\nvítejte v(Czech)\nBEM - vindo Ao Brasil(Portutuese)\nمرحبا بكم في(Arabic)");
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa欢迎光临(Simplified Chinese)\n歡迎光臨（traditional chinese）\nWelcome(English)\n어서 오세요.(Korean)\nいらっしゃいませ(Japanese)\nWillkommen in der(Germany)\nSouhaits de bienvenue(France)\nยินดีต้อนรับสู่(Thai)\nДобро пожаловать(Russian)\nBenvenuti a(Italian)\nvítejte v(Czech)\nBEM vindo Ao Brasil(Portuguese)\nمرحبا بكم في(Arabic)");
 
   _printText() async {
     // must start with this function if you are print with label

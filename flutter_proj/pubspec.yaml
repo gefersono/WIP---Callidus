@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   barcode: ^2.2.3
   sunmi_printer: ^1.0.4
+  sunmi_printer_plus: ^2.1.01
 dev_dependencies:
   flutter_test:
     sdk: flutter
