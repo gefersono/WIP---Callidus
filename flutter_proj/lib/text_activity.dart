@@ -30,7 +30,7 @@ class _TextActivityState extends State<TextActivity> {
     await SunmiPrinter.lineWrap(1);
     // print image only support Uint8List
     //await SunmiPrinter.printImage(img);
-    await SunmiPrinter.printText(displayText);
+    await SunmiPrinter.printText('$displayText\n\n');
     // only run exitLabelPrint at last index if you need print multiple label at once;
     await SunmiPrinter.exitLabelPrint();
   }
@@ -713,7 +713,7 @@ class _TextActivityState extends State<TextActivity> {
                     fillColor: Colors.white,
                     border:
                         OutlineInputBorder(borderRadius: BorderRadius.zero)),
-                maxLines: 16,
+                maxLines: 11,
               ),
             ),
             const SizedBox(
