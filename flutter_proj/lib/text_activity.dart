@@ -25,12 +25,12 @@ class _TextActivityState extends State<TextActivity> {
     await SunmiPrinter.startLabelPrint();
 
     /// 0 align left, 1 center, 2 align right.
-    await SunmiPrinter.setAlignment(PrintAlign.CENTER);
+    await SunmiPrinter.setAlignment(PrintAlign.LEFT);
     // spacing line
     await SunmiPrinter.lineWrap(1);
     // print image only support Uint8List
     //await SunmiPrinter.printImage(img);
-    await SunmiPrinter.printText('$displayText\n\n');
+    await SunmiPrinter.printText('$displayText\n\n\n\n\n');
     // only run exitLabelPrint at last index if you need print multiple label at once;
     await SunmiPrinter.exitLabelPrint();
   }
