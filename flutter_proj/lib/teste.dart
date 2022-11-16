@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
@@ -790,4 +789,3 @@ class TesteDoTexto extends StatelessWidget {
     );
   }
 }
-*/

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tectoy_app/formulary_activity.dart';
 import 'package:tectoy_app/image_activity.dart';
-import 'package:sunmi_printer/sunmi_printer.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 import 'qr_activity.dart';
 import 'setting_activity.dart';
 import 'bar_code_activity.dart';
@@ -15,18 +15,38 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var placeholder = 'Função nao implementada';
-  late PrinterStatus _printerStatus;
+  //late PrinterStatus _printerStatus;
   //late PrinterMode _printerMode;
-
+  bool printBinded = false;
+  int paperSize = 0;
+  String serialNumber = "";
+  String printerVersion = "";
   @override
   void initState() {
     super.initState();
 
-    _bindingPrinter().then( (bool? isBind) async => {
-      if (isBind!) {
-        _getPrinterStatus(),
-        //_printerMode = await _getPrinterMode(),
-      }
+    _bindingPrinter().then((bool? isBind) async {
+      SunmiPrinter.paperSize().then((int size) {
+        setState(() {
+          paperSize = size;
+        });
+      });
+
+      SunmiPrinter.printerVersion().then((String version) {
+        setState(() {
+          printerVersion = version;
+        });
+      });
+
+      SunmiPrinter.serialNumber().then((String serial) {
+        setState(() {
+          serialNumber = serial;
+        });
+      });
+
+      setState(() {
+        printBinded = isBind!;
+      });
     });
   }
 
@@ -35,21 +55,6 @@ class _HomeState extends State<Home> {
     final bool? result = await SunmiPrinter.bindingPrinter();
     return result;
   }
-
-  /// you can get printer status
-  Future<void> _getPrinterStatus() async {
-    final PrinterStatus result = await SunmiPrinter.getPrinterStatus();
-    setState(() {
-      _printerStatus = result;
-    });
-  }
-
-  /*
-  Future<PrinterMode> _getPrinterMode() async {
-    final PrinterMode mode = await SunmiPrinter.getPrinterMode();
-    return mode;
-  }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -377,20 +382,7 @@ class _HomeState extends State<Home> {
                           icon: const Image(
                               image: AssetImage('images/function_status.png')),
                           onPressed: () {
-                            var printerstatus = (_printerStatus == PrinterStatus.NORMAL)?'A Impressora está funcionando':'Impressora não conectada';
-                            final snackBar = SnackBar(
-                              content: Text(printerstatus),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                         ),
                         const Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sunmi_printer/sunmi_printer.dart';
+import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 String displayText = "";
 bool isBold = false;
@@ -18,21 +19,21 @@ class TextActivity extends StatefulWidget {
 class _TextActivityState extends State<TextActivity> {
   TextEditingController textController = TextEditingController(
       text:
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa欢迎光临(Simplified Chinese)\n歡迎光臨（traditional chinese）\nWelcome(English)\n어서 오세요.(Korean)\nいらっしゃいませ(Japanese)\nWillkommen in der(Germany)\nSouhaits de bienvenue(France)\nยินดีต้อนรับสู่(Thai)\nДобро пожаловать(Russian)\nBenvenuti a(Italian)\nvítejte v(Czech)\nBEM vindo Ao Brasil(Portuguese)\nمرحبا بكم في(Arabic)");
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa欢迎光临(Simplified Chinese)\n歡迎光臨（traditional chinese）\nWelcome(English)\n어서 오세요.(Korean)\nいらっしゃいませ(Japanese)\nWillkommen in der(Germany)\nSouhaits de bienvenue(France)\nยินดีต้อนรับสู่(Thai)\nДобро пожаловать(Russian)\nBenvenuti a(Italian)\nvítejte v(Czech)\nBEM vindo Ao Brasil(Portuguese)\nمرحبا بكم في(Arabic)");
 
   _printText() async {
-    // must start with this function if you are print with label
-    await SunmiPrinter.startLabelPrint();
+    await SunmiPrinter.startTransactionPrint(true);
 
-    /// 0 align left, 1 center, 2 align right.
-    await SunmiPrinter.setAlignment(PrintAlign.LEFT);
-    // spacing line
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);// Left align
+    await SunmiPrinter.printText('Align left');
+
     await SunmiPrinter.lineWrap(1);
-    // print image only support Uint8List
-    //await SunmiPrinter.printImage(img);
+    await SunmiPrinter.setCustomFontSize(_isTamText.toInt());
     await SunmiPrinter.printText('$displayText\n\n\n\n\n');
-    // only run exitLabelPrint at last index if you need print multiple label at once;
-    await SunmiPrinter.exitLabelPrint();
+    await SunmiPrinter.resetFontSize(); // Reset font to medium size
+
+    await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
+    await SunmiPrinter.exitTransactionPrint(true);
   }
 
   Color getColor(Set<MaterialState> states) {
@@ -75,7 +76,7 @@ class _TextActivityState extends State<TextActivity> {
                 ),
                 const Padding(
                   padding:
-                      EdgeInsets.only(left: 278, bottom: 0, right: 0, top: 20),
+                  EdgeInsets.only(left: 278, bottom: 0, right: 0, top: 20),
                   child: Text(
                     'Type monospace',
                     style: TextStyle(fontSize: 13.0, color: Colors.grey),
@@ -126,11 +127,11 @@ class _TextActivityState extends State<TextActivity> {
                       left: 295, bottom: 0, right: 0, top: 20),
                   child: Text(_charSet,
                       style:
-                          const TextStyle(fontSize: 15.0, color: Colors.grey)),
+                      const TextStyle(fontSize: 15.0, color: Colors.grey)),
                 ),
                 const Padding(
                   padding:
-                      EdgeInsets.only(left: 355, bottom: 0, right: 0, top: 18),
+                  EdgeInsets.only(left: 355, bottom: 0, right: 0, top: 18),
                   child: Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white,
@@ -163,12 +164,12 @@ class _TextActivityState extends State<TextActivity> {
                                     ),
                                     onPressed: () {
                                       state(
-                                        () {
+                                            () {
                                           Navigator.pop(context,'');
                                         },
                                       );
                                       setState(
-                                        () {
+                                            () {
                                           _charSet = 'CP437';
                                         },
                                       );
@@ -541,11 +542,11 @@ class _TextActivityState extends State<TextActivity> {
                       left: 320, bottom: 0, right: 0, top: 20),
                   child: Text('$_isTamText',
                       style:
-                          const TextStyle(fontSize: 17.0, color: Colors.grey)),
+                      const TextStyle(fontSize: 17.0, color: Colors.grey)),
                 ),
                 const Padding(
                   padding:
-                      EdgeInsets.only(left: 355, bottom: 0, right: 0, top: 18),
+                  EdgeInsets.only(left: 355, bottom: 0, right: 0, top: 18),
                   child: Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.white,
@@ -626,9 +627,9 @@ class _TextActivityState extends State<TextActivity> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () {Navigator.pop(context, 'Cancel');
-                              setState(() {
-                                _tamText = 24;
-                              });},
+                            setState(() {
+                              _tamText = 24;
+                            });},
                             child: const Text('Cancelar'),
                           ),
                           TextButton(
@@ -639,9 +640,9 @@ class _TextActivityState extends State<TextActivity> {
                               textStyle: const TextStyle(fontSize: 20),
                             ),
                             onPressed: () { Navigator.pop(context, 'OK');
-                              setState(() {
-                                _isTamText = _tamText;
-                              });},
+                            setState(() {
+                              _isTamText = _tamText;
+                            });},
                             child: const Text('Confirmar'),
                           ),
                         ],
@@ -712,7 +713,7 @@ class _TextActivityState extends State<TextActivity> {
                     filled: true,
                     fillColor: Colors.white,
                     border:
-                        OutlineInputBorder(borderRadius: BorderRadius.zero)),
+                    OutlineInputBorder(borderRadius: BorderRadius.zero)),
                 maxLines: 11,
               ),
             ),
