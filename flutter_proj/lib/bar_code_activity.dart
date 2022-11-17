@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
-class BarCodeActivity extends StatelessWidget {
+class BarCodeActivity extends StatefulWidget {
   //const MeuApp({Key? key}) : super(key: key);
   const BarCodeActivity({super.key});
+
+  @override
+  State<BarCodeActivity> createState() => _BarCodeActivityState();
+}
+
+class _BarCodeActivityState extends State<BarCodeActivity> {
+
+  _printBarCode() async {
+    await SunmiPrinter.initPrinter();
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.startTransactionPrint(true);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODE128,
+        textPosition: SunmiBarcodeTextPos.TEXT_UNDER,
+        height: 100);
+    await SunmiPrinter.lineWrap(3);
+    await SunmiPrinter.exitTransactionPrint(true);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +144,7 @@ class BarCodeActivity extends StatelessWidget {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
-
+                        _printBarCode();
                       },
                       child: const Text('Imprimir'),
                     ),

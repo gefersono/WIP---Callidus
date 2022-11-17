@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
-class QRCodeActivity extends StatelessWidget {
+class QRCodeActivity extends StatefulWidget {
   //const MeuApp({Key? key}) : super(key: key);
   const QRCodeActivity({super.key});
 
-  final String data = '2067a';
+  @override
+  State<QRCodeActivity> createState() => _QRCodeActivityState();
+}
+
+class _QRCodeActivityState extends State<QRCodeActivity> {
+  final String data = '2067a123';
+
+  _printQrCode() async {
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.startTransactionPrint(true);
+    await SunmiPrinter.printQRCode(data);
+    await SunmiPrinter.lineWrap(3);
+    await SunmiPrinter.exitTransactionPrint(true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +126,7 @@ class QRCodeActivity extends StatelessWidget {
                   Text(
                     'Código gerado com a palavra: $data',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                     ),
@@ -149,7 +164,7 @@ class QRCodeActivity extends StatelessWidget {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
-
+                        _printQrCode();
                       },
                       child: const Text('Imprimir'),
                     ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class ImageActivity extends StatelessWidget {
   const ImageActivity({Key? key}) : super(key: key);
 
