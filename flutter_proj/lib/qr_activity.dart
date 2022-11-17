@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeActivity extends StatelessWidget {
   //const MeuApp({Key? key}) : super(key: key);
   const QRCodeActivity({super.key});
+
+  final String data = '2067a';
 
   @override
   Widget build(BuildContext context) {
@@ -101,35 +104,53 @@ class QRCodeActivity extends StatelessWidget {
               onPressed: () {},
               child: const Text('Cortar Papel'),
             ),
+            //Texto
+            Center(
+              child: Column(
+                children: <Widget> [
+                  Text(
+                    'Código gerado com a palavra: $data',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  QrImage(
+                    data: data,
+                    size: 180,
+                    foregroundColor: Colors.white,
+                    //backgroundColor: Colors.black,
+                    gapless: true,
+                    errorCorrectionLevel: QrErrorCorrectLevel.H,
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(
               width: 200.0,
-              height: 240.0,
+              height: 50.0,
             ),
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: Stack(
                   children: <Widget>[
-                    Positioned.fill(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF692f36),
-                              Color(0xFF8a2a32),
-                              Color(0xFFc24450),
-                            ],
-                          ),
-                        ),
-                      ),
+                    Container(
+                      width: 360,
+                      height: 50,
+                      color: Colors.red,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
+                        fixedSize: const Size.fromWidth(360),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(13.0),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+
+                      },
                       child: const Text('Imprimir'),
                     ),
                   ],

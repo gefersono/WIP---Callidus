@@ -10,7 +10,6 @@ double _isTamText = 24;
 String _charSet = "CP18030";
 
 class TextActivity extends StatefulWidget {
-  //const MeuApp({Key? key}) : super(key: key);
   const TextActivity({super.key});
   @override
   State<TextActivity> createState() => _TextActivityState();
@@ -19,19 +18,29 @@ class TextActivity extends StatefulWidget {
 class _TextActivityState extends State<TextActivity> {
   TextEditingController textController = TextEditingController(
       text:
-      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa欢迎光临(Simplified Chinese)\n歡迎光臨（traditional chinese）\nWelcome(English)\n어서 오세요.(Korean)\nいらっしゃいませ(Japanese)\nWillkommen in der(Germany)\nSouhaits de bienvenue(France)\nยินดีต้อนรับสู่(Thai)\nДобро пожаловать(Russian)\nBenvenuti a(Italian)\nvítejte v(Czech)\nBEM vindo Ao Brasil(Portuguese)\nمرحبا بكم في(Arabic)");
+              "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa欢迎光临(Simplified Chinese)\n"
+              "歡迎光臨（traditional chinese）\n"
+              "Welcome(English)\n"
+              "어서 오세요.(Korean)\n"
+              "いらっしゃいませ(Japanese)\n"
+              "Willkommen in der(Germany)\n"
+              "Souhaits de bienvenue(France)\n"
+              "ยินดีต้อนรับสู่(Thai)\n"
+              "Добро пожаловать(Russian)\n"
+              "Benvenuti a(Italian)\n"
+              "vítejte v(Czech)\n"
+              "BEM vindo Ao Brasil(Portuguese)\n"
+              "مرحبا بكم في(Arabic)");
 
   _printText() async {
     await SunmiPrinter.startTransactionPrint(true);
-
     await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);// Left align
-    await SunmiPrinter.printText('Align left');
-
-    await SunmiPrinter.lineWrap(1);
+    //await SunmiPrinter.printText('Align left');
+    //await SunmiPrinter.lineWrap(1);
     await SunmiPrinter.setCustomFontSize(_isTamText.toInt());
-    await SunmiPrinter.printText('$displayText\n\n\n\n\n');
+    await SunmiPrinter.printText(displayText);
+    await SunmiPrinter.lineWrap(3);
     await SunmiPrinter.resetFontSize(); // Reset font to medium size
-
     await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
     await SunmiPrinter.exitTransactionPrint(true);
   }

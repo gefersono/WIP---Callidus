@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunmi_printer_plus/enums.dart';
 import 'package:tectoy_app/formulary_activity.dart';
 import 'package:tectoy_app/image_activity.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
@@ -14,39 +15,49 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var placeholder = 'Função nao implementada';
-  //late PrinterStatus _printerStatus;
+  String placeholder = 'Função nao implementada';
+  late PrinterStatus _printerStatus;
   //late PrinterMode _printerMode;
   bool printBinded = false;
   int paperSize = 0;
   String serialNumber = "";
   String printerVersion = "";
+
   @override
   void initState() {
     super.initState();
 
-    _bindingPrinter().then((bool? isBind) async {
+    _bindingPrinter().then((bool? isBind) async => {
+      //_getPrinterStatus(),
+      //print(_printerStatus);
       SunmiPrinter.paperSize().then((int size) {
         setState(() {
           paperSize = size;
         });
-      });
+      }),
 
       SunmiPrinter.printerVersion().then((String version) {
         setState(() {
           printerVersion = version;
         });
-      });
+      }),
 
       SunmiPrinter.serialNumber().then((String serial) {
         setState(() {
           serialNumber = serial;
         });
-      });
+      }),
+
+      SunmiPrinter.getPrinterStatus().then((PrinterStatus status) {
+        setState(() {
+          _printerStatus = status;
+        });
+      }),
 
       setState(() {
         printBinded = isBind!;
-      });
+      }),
+
     });
   }
 
@@ -382,7 +393,21 @@ class _HomeState extends State<Home> {
                           icon: const Image(
                               image: AssetImage('images/function_status.png')),
                           onPressed: () {
+                            var printerStatus = (_printerStatus == PrinterStatus.ERROR)?'A impressora está funcionando':'A impressora não está funcionando';
+                            //print(_printerStatus);
+                            final snackBar = SnackBar(
+                              content: Text(printerStatus),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
 
+                            // Find the ScaffoldMessenger in the widget tree
+                            // and use it to show a SnackBar.
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                         ),
                         const Text(
