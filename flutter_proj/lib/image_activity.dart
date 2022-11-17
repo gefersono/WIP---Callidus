@@ -66,36 +66,27 @@ class ImageActivity extends StatelessWidget {
             ),
             const SizedBox(
               width: 100.0,
-              height: 360.0,
+              height: 368.0,
             ),
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: Stack(
                   children: <Widget>[
-                    Positioned.fill(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF692f36),
-                              Color(0xFF8a2a32),
-                              Color(0xFFc24450),
-                            ],
-                          ),
-                        ),
-                      ),
+                    Container(
+                      width: 360,
+                      height: 50,
+                      color: Colors.red,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
+                        fixedSize: const Size.fromWidth(360),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(13.0),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {
-                        //print('teste0');
+                      onPressed: () async {
 
-                        //print('teste1');
                       },
                       child: const Text('Imprimir'),
                     ),

@@ -728,7 +728,7 @@ class _TextActivityState extends State<TextActivity> {
             ),
             const SizedBox(
               width: 100.0,
-              height: 3.0,
+              height: 15.0,
             ),
             //Imprimir
             Center(

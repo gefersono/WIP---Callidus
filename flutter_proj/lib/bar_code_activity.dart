@@ -103,33 +103,28 @@ class BarCodeActivity extends StatelessWidget {
             ),
             const SizedBox(
               width: 200.0,
-              height: 240.0,
+              height: 249.0,
             ),
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: Stack(
                   children: <Widget>[
-                    Positioned.fill(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF692f36),
-                              Color(0xFF8a2a32),
-                              Color(0xFFc24450),
-                            ],
-                          ),
-                        ),
-                      ),
+                    Container(
+                      width: 360,
+                      height: 50,
+                      color: Colors.red,
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
+                        fixedSize: const Size.fromWidth(360),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(13.0),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+
+                      },
                       child: const Text('Imprimir'),
                     ),
                   ],
