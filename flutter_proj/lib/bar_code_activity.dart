@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+import 'package:barcode_flutter/barcode_flutter.dart';
 
 class BarCodeActivity extends StatefulWidget {
   //const MeuApp({Key? key}) : super(key: key);
@@ -122,9 +123,24 @@ class _BarCodeActivityState extends State<BarCodeActivity> {
               onPressed: () {},
               child: const Text('Cortar Papel'),
             ),
+            
+            Center(
+              child: BarCodeImage(
+                params: Code39BarCodeParams(
+                  "1234567890",
+                  lineWidth: 2.0,                // width for a single black/white bar (default: 2.0)
+                  barHeight: 100.0,               // height for the entire widget (default: 100.0)
+                  withText: false,
+                ),
+                onError: (error) {               // Error handler
+                // ignore: avoid_print
+                print('error = $error');
+                },
+              ),
+            ),                        
             const SizedBox(
               width: 200.0,
-              height: 249.0,
+              height: 60.0,
             ),
             Center(
               child: ClipRRect(
