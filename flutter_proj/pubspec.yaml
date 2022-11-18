@@ -11,7 +11,6 @@ dependencies:
   sunmi_printer_plus: ^2.1.01
   esc_pos_printer: ^4.1.0
   qr_flutter: ^4.0.0
-  barcode_flutter: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
