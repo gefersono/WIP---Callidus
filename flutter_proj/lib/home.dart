@@ -23,6 +23,76 @@ class _HomeState extends State<Home> {
   String serialNumber = "";
   String printerVersion = "";
 
+  Future<void> _printCompleteTest() async {
+    await SunmiPrinter.startTransactionPrint(true);
+    
+    await SunmiPrinter.setCustomFontSize(24);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('Alinhamento');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+    await SunmiPrinter.printText('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+    await SunmiPrinter.printText('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.setCustomFontSize(48);
+    await SunmiPrinter.printText('TecToy Automação');
+    
+    await SunmiPrinter.setCustomFontSize(24);
+    await SunmiPrinter.lineWrap(2);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('Imprime BarCode');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODE128,
+        textPosition: SunmiBarcodeTextPos.TEXT_UNDER,
+        height: 100);
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODE39,
+        textPosition: SunmiBarcodeTextPos.BOTH,
+        height: 100);
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODABAR,
+        textPosition: SunmiBarcodeTextPos.TEXT_ABOVE,
+        height: 100);
+
+    await SunmiPrinter.lineWrap(2);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('Imprime QrCode');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.lineWrap(1);
+
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+    await SunmiPrinter.printQRCode('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printQRCode('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+    await SunmiPrinter.printQRCode('TecToy Automação');
+
+    await SunmiPrinter.resetFontSize(); // Reset font to medium size
+    await SunmiPrinter.lineWrap(3);
+    await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
+    await SunmiPrinter.exitTransactionPrint(true);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -113,21 +183,8 @@ class _HomeState extends State<Home> {
                           icon: const Image(
                               image: AssetImage('images/function_all.png')),
                           onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
-
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          },
+                            _printCompleteTest();
+                          }
                         ),
                         const Text(
                           'Teste Completo',
