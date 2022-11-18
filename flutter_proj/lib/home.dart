@@ -341,21 +341,10 @@ class _HomeState extends State<Home> {
                           icon: const Image(
                               image:
                               AssetImage('images/function_threeline.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
-
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          onPressed: () async {
+                            await SunmiPrinter.startTransactionPrint(true);
+                            await SunmiPrinter.lineWrap(5);
+                            await SunmiPrinter.exitTransactionPrint(true);
                           },
                         ),
                         const Text(
@@ -559,21 +548,10 @@ class _HomeState extends State<Home> {
                           iconSize: 100,
                           icon: const Image(
                               image: AssetImage('images/function_cortar.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
-
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          onPressed: () async {
+                            await SunmiPrinter.startTransactionPrint(true);
+                            await SunmiPrinter.submitTransactionPrint();
+                            await SunmiPrinter.exitTransactionPrint(true);
                           },
                         ),
                         const Text(
