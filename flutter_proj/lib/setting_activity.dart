@@ -12,7 +12,6 @@ class SettingActivity extends StatelessWidget {
         title: const Text('Configurações'),
       ),
       body: SafeArea(
-        //Text('QrCode', style: TextStyle(fontSize: 30.0, color: Colors.white),),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -42,38 +41,7 @@ class SettingActivity extends StatelessWidget {
             ),
             const SizedBox(
               width: 100.0,
-              height: 550.0,
-            ),
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(0),
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF692f36),
-                              Color(0xFF8a2a32),
-                              Color(0xFFc24450),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.all(16.0),
-                        textStyle: const TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {},
-                      child: const Text(''),
-                    ),
-                  ],
-                ),
-              ),
+              height: 440.0,
             ),
           ],
         ),

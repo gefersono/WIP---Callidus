@@ -18,8 +18,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String placeholder = 'Função nao implementada';
   late PrinterStatus _printerStatus;
-
-  //late PrinterMode _printerMode;
   bool printBinded = false;
   int paperSize = 0;
   String serialNumber = "";
@@ -193,6 +191,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //QRCode
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -220,6 +219,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //BarCode
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -248,6 +248,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //Texto
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -275,6 +276,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //Formulário
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -303,6 +305,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //Imagem
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -330,6 +333,7 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //Avanço Papel
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -356,80 +360,16 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
+
                   //Gaveta
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_cash.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_cash.png',
+                      textImage: 'Gaveta'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Gaveta',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
-                  //Lcd
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_lcd.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  //LCD
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_lcd.png', textImage: 'LCD'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Lcd',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //Status
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -471,370 +411,100 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  //TarjaPreta
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image:
-                                  AssetImage('images/function_blackline.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Tarja preta',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  //Tarja Preta
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_blackline.png',
+                      textImage: 'Tarja Preta'),
+
                   //Teste de Etiqueta
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_label.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_label.png',
+                      textImage: 'Teste de Etiqueta'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Teste de Etiqueta',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //Cortar Papel
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_cortar.png')),
-                          onPressed: () async {
-                            await SunmiPrinter.startTransactionPrint(true);
-                            await SunmiPrinter.submitTransactionPrint();
-                            await SunmiPrinter.exitTransactionPrint(true);
-                          },
-                        ),
-                        const Text(
-                          'Cortar Papel',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_cortar.png',
+                      textImage: 'Cortar Papel'),
+
                   //Scanner
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_scanner.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_scanner.png',
+                      textImage: 'Scanner'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Scanner',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //Luz de Led
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_led.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_led.png',
+                      textImage: 'Luz de Led'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Luz de Led',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //PayGo
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_payment.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_payment.png',
+                      textImage: 'PayGo'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'PayGo',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //Scanner Leitor
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_scanner.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_scanner.png',
+                      textImage: 'Scanner Leitor'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Scanner Leitor',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //NFC
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_nfc.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_nfc.png', textImage: 'NFC'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'NFC',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //M-Stef
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_payment.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_payment.png',
+                      textImage: 'M-Stef'),
 
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'M-Stef',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
                   //Display
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/telas.png')),
-                          onPressed: () {
-                            // NAO IMPLEMENTADA AINDA
-                            final snackBar = SnackBar(
-                              content: Text(placeholder),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
-
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Display',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/telas.png', textImage: 'Display'),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class HomeButtonPlaceHolder extends StatelessWidget {
+  const HomeButtonPlaceHolder(
+      {Key? key, required this.assetImage, required this.textImage})
+      : super(key: key);
+  final String placeholder = 'Função nao implementada';
+  final String assetImage;
+  final String textImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      color: const Color(0xFF171a2c),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+            iconSize: 100,
+            icon: Image(image: AssetImage(assetImage)),
+            onPressed: () {
+              final snackBar = SnackBar(
+                content: Text(placeholder),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {},
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
+          ),
+          Text(
+            textImage,
+            style: const TextStyle(fontSize: 15.0, color: Colors.red),
+          ),
+        ],
       ),
     );
   }
