@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+
 import 'package:tectoy_app/formulary_activity.dart';
 import 'package:tectoy_app/image_activity.dart';
-import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
-import 'qr_activity.dart';
-import 'setting_activity.dart';
-import 'bar_code_activity.dart';
-import 'text_activity.dart';
+import 'package:tectoy_app/qr_activity.dart';
+import 'package:tectoy_app/setting_activity.dart';
+import 'package:tectoy_app/bar_code_activity.dart';
+import 'package:tectoy_app/text_activity.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,121 +17,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String placeholder = 'Função nao implementada';
-  late PrinterStatus _printerStatus;
   bool printBinded = false;
   int paperSize = 0;
   String serialNumber = "";
   String printerVersion = "";
-
-  Future<void> _printCompleteTest() async {
-    await SunmiPrinter.startTransactionPrint(true);
-
-    await SunmiPrinter.setCustomFontSize(24);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-    await SunmiPrinter.printText('Alinhamento');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.printText('--------------------------------');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
-    await SunmiPrinter.printText('TecToy Automação');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-    await SunmiPrinter.printText('TecToy Automação');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
-    await SunmiPrinter.printText('TecToy Automação');
-    await SunmiPrinter.lineWrap(1);
-
-    await SunmiPrinter.printText('--------------------------------');
-    await SunmiPrinter.setCustomFontSize(48);
-    await SunmiPrinter.printText('TecToy Automação');
-
-    await SunmiPrinter.setCustomFontSize(24);
-    await SunmiPrinter.lineWrap(2);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-    await SunmiPrinter.printText('Imprime BarCode');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.printText('--------------------------------');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
-    await SunmiPrinter.printBarCode('1234567890',
-        barcodeType: SunmiBarcodeType.CODE128,
-        textPosition: SunmiBarcodeTextPos.TEXT_UNDER,
-        height: 100);
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-    await SunmiPrinter.printBarCode('1234567890',
-        barcodeType: SunmiBarcodeType.CODE39,
-        textPosition: SunmiBarcodeTextPos.BOTH,
-        height: 100);
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
-    await SunmiPrinter.printBarCode('1234567890',
-        barcodeType: SunmiBarcodeType.CODABAR,
-        textPosition: SunmiBarcodeTextPos.TEXT_ABOVE,
-        height: 100);
-
-    await SunmiPrinter.lineWrap(2);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-    await SunmiPrinter.printText('Imprime QrCode');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.printText('--------------------------------');
-    await SunmiPrinter.lineWrap(1);
-
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
-    await SunmiPrinter.printQRCode('TecToy Automação');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
-    await SunmiPrinter.printQRCode('TecToy Automação');
-    await SunmiPrinter.lineWrap(1);
-    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
-    await SunmiPrinter.printQRCode('TecToy Automação');
-
-    await SunmiPrinter.resetFontSize(); // Reset font to medium size
-    await SunmiPrinter.lineWrap(3);
-    await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
-    await SunmiPrinter.exitTransactionPrint(true);
-  }
 
   @override
   void initState() {
     super.initState();
 
     _bindingPrinter().then((bool? isBind) async => {
-          //_getPrinterStatus(),
-          //print(_printerStatus);
           SunmiPrinter.paperSize().then((int size) {
             setState(() {
               paperSize = size;
             });
           }),
-
           SunmiPrinter.printerVersion().then((String version) {
             setState(() {
               printerVersion = version;
             });
           }),
-
           SunmiPrinter.serialNumber().then((String serial) {
             setState(() {
               serialNumber = serial;
             });
           }),
-
-          SunmiPrinter.getPrinterStatus().then((PrinterStatus status) {
-            setState(() {
-              _printerStatus = status;
-            });
-          }),
-
           setState(() {
             printBinded = isBind!;
           }),
         });
   }
 
-  /// must binding ur printer at first init in app
   Future<bool?> _bindingPrinter() async {
     final bool? result = await SunmiPrinter.bindingPrinter();
     return result;
@@ -144,6 +61,7 @@ class _HomeState extends State<Home> {
         backgroundColor: const Color(0xFF171a2c),
         title: const Text('TecToy Sunmi Flutter Android'),
         actions: <Widget>[
+          //Settings
           IconButton(
             icon: const Image(image: AssetImage('images/setting.png')),
             tooltip: 'Show Settings',
@@ -168,198 +86,49 @@ class _HomeState extends State<Home> {
                 mainAxisSpacing: 2,
                 crossAxisCount: 2,
                 children: <Widget>[
+                  // Main Buttons
+
                   //Teste Completo
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    //const Image(image: AssetImage('images/function_all.png')),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                            iconSize: 100,
-                            icon: const Image(
-                                image: AssetImage('images/function_all.png')),
-                            onPressed: () {
-                              _printCompleteTest();
-                            }),
-                        const Text(
-                          'Teste Completo',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const FuncHomeButton(
+                      idFunction: 'CompleteTest',
+                      assetImage: 'images/function_all.png',
+                      textImage: 'Teste Completo'),
 
                   //QRCode
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_qr.png')),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const QRCodeActivity()),
-                            );
-                          },
-                        ),
-                        const Text(
-                          'QR Code',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  HomeButton(
+                      assetImage: 'images/function_qr.png',
+                      textImage: 'QR Code',
+                      activityIndex: 0),
 
                   //BarCode
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_barcode.png')),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const BarCodeActivity()),
-                            );
-                          },
-                        ),
-                        const Text(
-                          'BarCode',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  HomeButton(
+                      assetImage: 'images/function_barcode.png',
+                      textImage: 'Bar Code',
+                      activityIndex: 1),
 
                   //Texto
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_text.png')),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const TextActivity()),
-                            );
-                          },
-                        ),
-                        const Text(
-                          'Texto',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  HomeButton(
+                      assetImage: 'images/function_text.png',
+                      textImage: 'Texto',
+                      activityIndex: 2),
 
                   //Formulário
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_tab.png')),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const FormularyActivity()),
-                            );
-                          },
-                        ),
-                        const Text(
-                          'Formulário',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  HomeButton(
+                      assetImage: 'images/function_tab.png',
+                      textImage: 'Formulário',
+                      activityIndex: 3),
 
                   //Imagem
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_pic.png')),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ImageActivity()),
-                            );
-                          },
-                        ),
-                        const Text(
-                          'Imagem',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  HomeButton(
+                      assetImage: 'images/function_pic.png',
+                      textImage: 'Imagem',
+                      activityIndex: 4),
 
                   //Avanço Papel
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image:
-                                  AssetImage('images/function_threeline.png')),
-                          onPressed: () async {
-                            await SunmiPrinter.startTransactionPrint(true);
-                            await SunmiPrinter.lineWrap(5);
-                            await SunmiPrinter.exitTransactionPrint(true);
-                          },
-                        ),
-                        const Text(
-                          'Avanço Papel',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const FuncHomeButton(
+                      idFunction: 'LineWrap',
+                      assetImage: 'images/function_threeline.png',
+                      textImage: 'Avanço Papel'),
 
                   //Gaveta
                   const HomeButtonPlaceHolder(
@@ -371,46 +140,9 @@ class _HomeState extends State<Home> {
                       assetImage: 'images/function_lcd.png', textImage: 'LCD'),
 
                   //Status
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: const Color(0xFF171a2c),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_status.png')),
-                          onPressed: () {
-                            var printerStatus =
-                                (_printerStatus == PrinterStatus.ERROR)
-                                    ? 'A impressora está funcionando'
-                                    : 'A impressora não está funcionando';
-                            //print(_printerStatus);
-                            final snackBar = SnackBar(
-                              content: Text(printerStatus),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  // Some code to undo the change.
-                                },
-                              ),
-                            );
-
-                            // Find the ScaffoldMessenger in the widget tree
-                            // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                        ),
-                        const Text(
-                          'Status',
-                          style: TextStyle(fontSize: 15.0, color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const HomeButtonPlaceHolder(
+                      assetImage: 'images/function_status.png',
+                      textImage: 'Status'),
 
                   //Tarja Preta
                   const HomeButtonPlaceHolder(
@@ -500,6 +232,170 @@ class HomeButtonPlaceHolder extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
           ),
+          Text(
+            textImage,
+            style: const TextStyle(fontSize: 15.0, color: Colors.red),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeButton extends StatelessWidget {
+  HomeButton(
+      {Key? key,
+      required this.assetImage,
+      required this.textImage,
+      required this.activityIndex})
+      : super(key: key);
+
+  final String assetImage;
+  final String textImage;
+  final List<Widget> activityList = [
+    const QRCodeActivity(),
+    const BarCodeActivity(),
+    const TextActivity(),
+    const FormularyActivity(),
+    const ImageActivity()
+  ];
+  final int activityIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      color: const Color(0xFF171a2c),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+            iconSize: 100,
+            icon: Image(image: AssetImage(assetImage)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => activityList[activityIndex]),
+              );
+            },
+          ),
+          Text(
+            textImage,
+            style: const TextStyle(fontSize: 15.0, color: Colors.red),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FuncHomeButton extends StatelessWidget {
+  const FuncHomeButton(
+      {Key? key,
+      required this.idFunction,
+      required this.assetImage,
+      required this.textImage})
+      : super(key: key);
+
+  final String idFunction;
+  final String assetImage;
+  final String textImage;
+
+  Future<void> _printCompleteTest() async {
+    await SunmiPrinter.startTransactionPrint(true);
+
+    await SunmiPrinter.setCustomFontSize(24);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('Alinhamento');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+    await SunmiPrinter.printText('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+    await SunmiPrinter.printText('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.setCustomFontSize(48);
+    await SunmiPrinter.printText('TecToy Automação');
+
+    await SunmiPrinter.setCustomFontSize(24);
+    await SunmiPrinter.lineWrap(2);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('Imprime BarCode');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODE128,
+        textPosition: SunmiBarcodeTextPos.TEXT_UNDER,
+        height: 100);
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODE39,
+        textPosition: SunmiBarcodeTextPos.BOTH,
+        height: 100);
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+    await SunmiPrinter.printBarCode('1234567890',
+        barcodeType: SunmiBarcodeType.CODABAR,
+        textPosition: SunmiBarcodeTextPos.TEXT_ABOVE,
+        height: 100);
+
+    await SunmiPrinter.lineWrap(2);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printText('Imprime QrCode');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.printText('--------------------------------');
+    await SunmiPrinter.lineWrap(1);
+
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+    await SunmiPrinter.printQRCode('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.printQRCode('TecToy Automação');
+    await SunmiPrinter.lineWrap(1);
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+    await SunmiPrinter.printQRCode('TecToy Automação');
+
+    await SunmiPrinter.resetFontSize(); // Reset font to medium size
+    await SunmiPrinter.lineWrap(3);
+    await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
+    await SunmiPrinter.exitTransactionPrint(true);
+  }
+
+  Future<void> _lineWrap() async {
+    await SunmiPrinter.startTransactionPrint(true);
+    await SunmiPrinter.lineWrap(5);
+    await SunmiPrinter.exitTransactionPrint(true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      color: const Color(0xFF171a2c),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+              iconSize: 100,
+              icon: Image(image: AssetImage(assetImage)),
+              onPressed: () {
+                (idFunction == 'CompleteTest')
+                    ? _printCompleteTest()
+                    : _lineWrap();
+              }),
           Text(
             textImage,
             style: const TextStyle(fontSize: 15.0, color: Colors.red),
