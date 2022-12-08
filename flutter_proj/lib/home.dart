@@ -10,6 +10,7 @@ import 'text_activity.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
+
   @override
   State<Home> createState() => _HomeState();
 }
@@ -17,6 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String placeholder = 'Função nao implementada';
   late PrinterStatus _printerStatus;
+
   //late PrinterMode _printerMode;
   bool printBinded = false;
   int paperSize = 0;
@@ -25,7 +27,7 @@ class _HomeState extends State<Home> {
 
   Future<void> _printCompleteTest() async {
     await SunmiPrinter.startTransactionPrint(true);
-    
+
     await SunmiPrinter.setCustomFontSize(24);
     await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
     await SunmiPrinter.printText('Alinhamento');
@@ -41,11 +43,11 @@ class _HomeState extends State<Home> {
     await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
     await SunmiPrinter.printText('TecToy Automação');
     await SunmiPrinter.lineWrap(1);
-    
+
     await SunmiPrinter.printText('--------------------------------');
     await SunmiPrinter.setCustomFontSize(48);
     await SunmiPrinter.printText('TecToy Automação');
-    
+
     await SunmiPrinter.setCustomFontSize(24);
     await SunmiPrinter.lineWrap(2);
     await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
@@ -98,37 +100,36 @@ class _HomeState extends State<Home> {
     super.initState();
 
     _bindingPrinter().then((bool? isBind) async => {
-      //_getPrinterStatus(),
-      //print(_printerStatus);
-      SunmiPrinter.paperSize().then((int size) {
-        setState(() {
-          paperSize = size;
+          //_getPrinterStatus(),
+          //print(_printerStatus);
+          SunmiPrinter.paperSize().then((int size) {
+            setState(() {
+              paperSize = size;
+            });
+          }),
+
+          SunmiPrinter.printerVersion().then((String version) {
+            setState(() {
+              printerVersion = version;
+            });
+          }),
+
+          SunmiPrinter.serialNumber().then((String serial) {
+            setState(() {
+              serialNumber = serial;
+            });
+          }),
+
+          SunmiPrinter.getPrinterStatus().then((PrinterStatus status) {
+            setState(() {
+              _printerStatus = status;
+            });
+          }),
+
+          setState(() {
+            printBinded = isBind!;
+          }),
         });
-      }),
-
-      SunmiPrinter.printerVersion().then((String version) {
-        setState(() {
-          printerVersion = version;
-        });
-      }),
-
-      SunmiPrinter.serialNumber().then((String serial) {
-        setState(() {
-          serialNumber = serial;
-        });
-      }),
-
-      SunmiPrinter.getPrinterStatus().then((PrinterStatus status) {
-        setState(() {
-          _printerStatus = status;
-        });
-      }),
-
-      setState(() {
-        printBinded = isBind!;
-      }),
-
-    });
   }
 
   /// must binding ur printer at first init in app
@@ -179,13 +180,12 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         IconButton(
-                          iconSize: 100,
-                          icon: const Image(
-                              image: AssetImage('images/function_all.png')),
-                          onPressed: () {
-                            _printCompleteTest();
-                          }
-                        ),
+                            iconSize: 100,
+                            icon: const Image(
+                                image: AssetImage('images/function_all.png')),
+                            onPressed: () {
+                              _printCompleteTest();
+                            }),
                         const Text(
                           'Teste Completo',
                           style: TextStyle(fontSize: 15.0, color: Colors.red),
@@ -236,7 +236,8 @@ class _HomeState extends State<Home> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const BarCodeActivity()),
+                                  builder: (context) =>
+                                      const BarCodeActivity()),
                             );
                           },
                         ),
@@ -290,7 +291,8 @@ class _HomeState extends State<Home> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const FormularyActivity()),
+                                  builder: (context) =>
+                                      const FormularyActivity()),
                             );
                           },
                         ),
@@ -340,7 +342,7 @@ class _HomeState extends State<Home> {
                           iconSize: 100,
                           icon: const Image(
                               image:
-                              AssetImage('images/function_threeline.png')),
+                                  AssetImage('images/function_threeline.png')),
                           onPressed: () async {
                             await SunmiPrinter.startTransactionPrint(true);
                             await SunmiPrinter.lineWrap(5);
@@ -380,7 +382,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -416,7 +419,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -439,7 +443,10 @@ class _HomeState extends State<Home> {
                           icon: const Image(
                               image: AssetImage('images/function_status.png')),
                           onPressed: () {
-                            var printerStatus = (_printerStatus == PrinterStatus.ERROR)?'A impressora está funcionando':'A impressora não está funcionando';
+                            var printerStatus =
+                                (_printerStatus == PrinterStatus.ERROR)
+                                    ? 'A impressora está funcionando'
+                                    : 'A impressora não está funcionando';
                             //print(_printerStatus);
                             final snackBar = SnackBar(
                               content: Text(printerStatus),
@@ -453,7 +460,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -475,7 +483,7 @@ class _HomeState extends State<Home> {
                           iconSize: 100,
                           icon: const Image(
                               image:
-                              AssetImage('images/function_blackline.png')),
+                                  AssetImage('images/function_blackline.png')),
                           onPressed: () {
                             // NAO IMPLEMENTADA AINDA
                             final snackBar = SnackBar(
@@ -490,7 +498,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -526,7 +535,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -587,7 +597,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -623,7 +634,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -659,7 +671,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -695,7 +708,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -731,7 +745,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -767,7 +782,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(
@@ -803,7 +819,8 @@ class _HomeState extends State<Home> {
 
                             // Find the ScaffoldMessenger in the widget tree
                             // and use it to show a SnackBar.
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
                           },
                         ),
                         const Text(

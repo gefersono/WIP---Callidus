@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SettingActivity extends StatelessWidget {
-  //const MeuApp({Key? key}) : super(key: key);
   const SettingActivity({super.key});
 
   @override

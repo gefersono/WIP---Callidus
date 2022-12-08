@@ -12,7 +12,6 @@ class FormularyActivity extends StatelessWidget {
         title: const Text('Formulario'),
       ),
       body: SafeArea(
-        //Text('QrCode', style: TextStyle(fontSize: 30.0, color: Colors.white),),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -70,9 +69,7 @@ class FormularyActivity extends StatelessWidget {
                         padding: const EdgeInsets.all(13.0),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () async {
-
-                      },
+                      onPressed: () async {},
                       child: const Text('Imprimir'),
                     ),
                   ],

@@ -122,7 +122,7 @@ class _QRCodeActivityState extends State<QRCodeActivity> {
             //Texto
             Center(
               child: Column(
-                children: <Widget> [
+                children: <Widget>[
                   Text(
                     'Código gerado com a palavra: $data',
                     textAlign: TextAlign.center,

@@ -11,7 +11,6 @@ class BarCodeActivity extends StatefulWidget {
 }
 
 class _BarCodeActivityState extends State<BarCodeActivity> {
-
   _printBarCode() async {
     await SunmiPrinter.initPrinter();
     await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
@@ -23,7 +22,6 @@ class _BarCodeActivityState extends State<BarCodeActivity> {
     await SunmiPrinter.lineWrap(3);
     await SunmiPrinter.exitTransactionPrint(true);
   }
-
 
   @override
   Widget build(BuildContext context) {
