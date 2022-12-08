@@ -3,7 +3,6 @@ import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class BarCodeActivity extends StatefulWidget {
-  //const MeuApp({Key? key}) : super(key: key);
   const BarCodeActivity({super.key});
 
   @override

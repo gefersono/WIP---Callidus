@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
-
 import 'package:tectoy_app/formulary_activity.dart';
 import 'package:tectoy_app/image_activity.dart';
 import 'package:tectoy_app/qr_activity.dart';

@@ -1,5 +1,6 @@
+/*
+
 import 'package:flutter/material.dart';
-import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class teste extends StatelessWidget {
   const teste({Key? key}) : super(key: key);
@@ -45,3 +46,4 @@ class teste extends StatelessWidget {
     );
   }
 }
+*/

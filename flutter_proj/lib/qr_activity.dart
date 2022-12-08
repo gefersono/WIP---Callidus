@@ -4,7 +4,6 @@ import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
 class QRCodeActivity extends StatefulWidget {
-  //const MeuApp({Key? key}) : super(key: key);
   const QRCodeActivity({super.key});
 
   @override
@@ -31,7 +30,6 @@ class _QRCodeActivityState extends State<QRCodeActivity> {
         title: const Text('QrCode'),
       ),
       body: SafeArea(
-        //Text('QrCode', style: TextStyle(fontSize: 30.0, color: Colors.white),),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -135,7 +133,6 @@ class _QRCodeActivityState extends State<QRCodeActivity> {
                     data: data,
                     size: 180,
                     foregroundColor: Colors.white,
-                    //backgroundColor: Colors.black,
                     gapless: true,
                     errorCorrectionLevel: QrErrorCorrectLevel.H,
                   ),
