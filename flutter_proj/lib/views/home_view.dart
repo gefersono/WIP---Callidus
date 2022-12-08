@@ -225,7 +225,6 @@ class HomeButtonPlaceHolder extends StatelessWidget {
   const HomeButtonPlaceHolder(
       {Key? key, required this.assetImage, required this.textImage})
       : super(key: key);
-  final String placeholder = 'Função nao implementada';
   final String assetImage;
   final String textImage;
 
@@ -242,14 +241,11 @@ class HomeButtonPlaceHolder extends StatelessWidget {
             iconSize: 100,
             icon: Image(image: AssetImage(assetImage)),
             onPressed: () {
-              final snackBar = SnackBar(
-                content: Text(placeholder),
-                action: SnackBarAction(
-                  label: 'Undo',
-                  onPressed: () {},
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Função nao implementada'),
                 ),
               );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
           ),
           Text(
