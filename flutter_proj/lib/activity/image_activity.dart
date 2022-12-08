@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:sunmi_printer_plus/enums.dart';
+import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
+
 class ImageActivity extends StatelessWidget {
   const ImageActivity({Key? key}) : super(key: key);
+
+  printImage() async {
+    final ByteData bytes = await rootBundle.load('images/test1.jpg');
+    final Uint8List list = bytes.buffer.asUint8List();
+    await SunmiPrinter.initPrinter();
+    await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+    await SunmiPrinter.startTransactionPrint(true);
+    await SunmiPrinter.printImage(list);
+    await SunmiPrinter.lineWrap(5);
+    await SunmiPrinter.exitTransactionPrint(true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +100,7 @@ class ImageActivity extends StatelessWidget {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
-
+                        printImage();
                       },
                       child: const Text('Imprimir'),
                     ),

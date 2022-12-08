@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:sunmi_printer_plus/enums.dart';
 import 'package:sunmi_printer_plus/sunmi_printer_plus.dart';
 
@@ -66,8 +67,26 @@ Future<void> printCompleteTest() async {
   await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
   await SunmiPrinter.printQRCode('TecToy Automação');
 
-  await SunmiPrinter.resetFontSize(); // Reset font to medium size
+  await SunmiPrinter.lineWrap(2);
+  await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+  await SunmiPrinter.printText('Imprime Imagem');
+  await SunmiPrinter.lineWrap(1);
+  await SunmiPrinter.printText('--------------------------------');
+  await SunmiPrinter.lineWrap(1);
+
+  final ByteData bytes = await rootBundle.load('images/test1.jpg');
+  final Uint8List list = bytes.buffer.asUint8List();
+  await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
+  await SunmiPrinter.printImage(list);
   await SunmiPrinter.lineWrap(3);
+  await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
+  await SunmiPrinter.printImage(list);
+  await SunmiPrinter.lineWrap(3);
+  await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
+  await SunmiPrinter.printImage(list);
+
+  await SunmiPrinter.resetFontSize(); // Reset font to medium size
+  await SunmiPrinter.lineWrap(5);
   await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
   await SunmiPrinter.exitTransactionPrint(true);
 }
