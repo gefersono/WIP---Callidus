@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tectoy_app/activity/printer_info_activity.dart';
 
 class SettingActivity extends StatelessWidget {
   const SettingActivity({super.key});
@@ -16,13 +17,25 @@ class SettingActivity extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
-              child: const Text('Método de conexão'),
+            Row(
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Método de conexão'),
+                ),
+                const Padding(
+                  padding:
+                      EdgeInsets.only(left: 125, bottom: 0, right: 0, top: 5),
+                  child: Text(
+                    'API',
+                    style: TextStyle(fontSize: 20.0, color: Colors.grey),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               width: 400.0,
@@ -31,13 +44,41 @@ class SettingActivity extends StatelessWidget {
                 decoration: BoxDecoration(color: Colors.grey),
               ),
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
-              child: const Text('Informação da impressora'),
+            Row(
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PrinterInfoActivity(),
+                      ),
+                    );
+                  },
+                  child: const Text('Informação da impressora'),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(
+                        left: 60, bottom: 0, right: 0, top: 5),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PrinterInfoActivity(),
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.input_sharp,
+                        color: Colors.grey,
+                      ),
+                    )),
+              ],
             ),
             const SizedBox(
               width: 100.0,
