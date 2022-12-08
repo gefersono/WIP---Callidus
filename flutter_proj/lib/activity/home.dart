@@ -17,7 +17,6 @@ class _HomeState extends State<Home> {
   String printerVersion = "";
 
   @override
-
   /// Printer Connection
   void initState() {
     super.initState();
