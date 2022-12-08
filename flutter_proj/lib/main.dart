@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'viewmodels/home.dart';
+import 'package:tectoy_app/activity/home.dart';
 
 void main() {
   runApp(

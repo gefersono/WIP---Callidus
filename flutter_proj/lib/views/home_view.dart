@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tectoy_app/formulary_activity.dart';
+import 'package:tectoy_app/activity/formulary_activity.dart';
+import 'package:tectoy_app/activity/image_activity.dart';
+import 'package:tectoy_app/activity/text_activity.dart';
 import 'package:tectoy_app/models/home_controller.dart';
-import 'package:tectoy_app/image_activity.dart';
-import 'package:tectoy_app/qr_activity.dart';
-import 'package:tectoy_app/bar_code_activity.dart';
-import 'package:tectoy_app/setting_activity.dart';
-import 'package:tectoy_app/text_activity.dart';
+import 'package:tectoy_app/activity/qr_activity.dart';
+import 'package:tectoy_app/activity/bar_code_activity.dart';
+import 'package:tectoy_app/activity/setting_activity.dart';
 
 /// Main View
 class HomeView extends StatelessWidget {
