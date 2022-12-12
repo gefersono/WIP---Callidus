@@ -14,20 +14,17 @@ Future<void> printCompleteTest() async {
   await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
   await SunmiPrinter.printText('TecToy Automação');
-  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
   await SunmiPrinter.printText('TecToy Automação');
-  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
   await SunmiPrinter.printText('TecToy Automação');
-  await SunmiPrinter.lineWrap(1);
 
   await SunmiPrinter.printText('--------------------------------');
   await SunmiPrinter.setCustomFontSize(48);
   await SunmiPrinter.printText('TecToy Automação');
+  await SunmiPrinter.lineWrap(1);
 
   await SunmiPrinter.setCustomFontSize(24);
-  await SunmiPrinter.lineWrap(2);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
   await SunmiPrinter.printText('Imprime BarCode');
   await SunmiPrinter.lineWrap(1);
@@ -38,20 +35,18 @@ Future<void> printCompleteTest() async {
       barcodeType: SunmiBarcodeType.CODE128,
       textPosition: SunmiBarcodeTextPos.TEXT_UNDER,
       height: 100);
-  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
   await SunmiPrinter.printBarCode('1234567890',
       barcodeType: SunmiBarcodeType.CODE39,
       textPosition: SunmiBarcodeTextPos.BOTH,
       height: 100);
-  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
   await SunmiPrinter.printBarCode('1234567890',
       barcodeType: SunmiBarcodeType.CODABAR,
       textPosition: SunmiBarcodeTextPos.TEXT_ABOVE,
       height: 100);
 
-  await SunmiPrinter.lineWrap(2);
+  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
   await SunmiPrinter.printText('Imprime QrCode');
   await SunmiPrinter.lineWrap(1);
@@ -67,7 +62,7 @@ Future<void> printCompleteTest() async {
   await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
   await SunmiPrinter.printQRCode('TecToy Automação');
 
-  await SunmiPrinter.lineWrap(2);
+  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
   await SunmiPrinter.printText('Imprime Imagem');
   await SunmiPrinter.lineWrap(1);
@@ -78,15 +73,15 @@ Future<void> printCompleteTest() async {
   final Uint8List list = bytes.buffer.asUint8List();
   await SunmiPrinter.setAlignment(SunmiPrintAlign.LEFT);
   await SunmiPrinter.printImage(list);
-  await SunmiPrinter.lineWrap(3);
+  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
   await SunmiPrinter.printImage(list);
-  await SunmiPrinter.lineWrap(3);
+  await SunmiPrinter.lineWrap(1);
   await SunmiPrinter.setAlignment(SunmiPrintAlign.RIGHT);
   await SunmiPrinter.printImage(list);
 
   await SunmiPrinter.resetFontSize(); // Reset font to medium size
-  await SunmiPrinter.lineWrap(5);
+  await SunmiPrinter.lineWrap(4);
   await SunmiPrinter.submitTransactionPrint(); // SUBMIT and cut paper
   await SunmiPrinter.exitTransactionPrint(true);
 }
@@ -94,6 +89,6 @@ Future<void> printCompleteTest() async {
 /// Line Wrap Function
 Future<void> lineWrap() async {
   await SunmiPrinter.startTransactionPrint(true);
-  await SunmiPrinter.lineWrap(5);
+  await SunmiPrinter.lineWrap(4);
   await SunmiPrinter.exitTransactionPrint(true);
 }
